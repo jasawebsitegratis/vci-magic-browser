@@ -1,0 +1,74 @@
+{
+  "name": "vci-magic-browser",
+  "version": "1.0.0",
+  "description": "VCI Magic Browser - Electron Multi Session Browser dengan Grouping",
+  "main": "main/index.js",
+  "homepage": "https://github.com/jasawebsitegratis/vci-magic-browser",
+  "author": "jasaSEOterdekat.com",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dev": "cross-env NODE_ENV=development electron .",
+    "build": "npm run build:win32 && npm run build:win64",
+    "build:win32": "electron-builder --win --ia32",
+    "build:win64": "electron-builder --win --x64",
+    "build:portable": "electron-builder --win --portable",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.1.1",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "electron": "^latest",
+    "electron-builder": "^24.6.4",
+    "cross-env": "^7.0.3"
+  },
+  "build": {
+    "appId": "com.jasaseoterdekat.vcmagicbrowser",
+    "productName": "VCI Magic Browser",
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64", "ia32"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64", "ia32"]
+        }
+      ],
+      "certificateFile": null,
+      "certificatePassword": null,
+      "signingHashAlgorithms": ["sha256"],
+      "sign": null
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "VCI Magic Browser",
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico",
+      "installerHeaderIcon": "assets/icon.ico",
+      "artifactName": "${productName}-${version}-${arch}-installer.${ext}"
+    },
+    "portable": {
+      "artifactName": "${productName}-${version}-${arch}-portable.${ext}"
+    },
+    "files": [
+      "main/**/*",
+      "preload/**/*",
+      "renderer/**/*",
+      "assets/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ]
+  }
+}
